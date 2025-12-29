@@ -10,15 +10,17 @@ const server = http.createServer(app)
 
 const io= new Server(server,{
   cors:{
-    origin: "https://letsconnect0.netlify.app",
-    methods:["GET", "POST"]
+    origin:[ "*",
+    "https://letsconnect0.netlify.app",
+    ],
+    methods:["GET", "POST"],
   }
 });
 
 io.on("connection",(socket)=>{
   console.log(`connected ${socket.id}`)
   socket.on("send_message", (data)=>{
-    io.emit("recieve_message", data)
+    socket.broadcast("recieve_message", data)
   })
 
 
@@ -27,5 +29,5 @@ socket.on("disconnect", ()=>{
 })
 })
 server.listen(port,()=>{
-  console.log(`server running on http://localhost${port}`)
+  console.log(`server running on ${port}`)
 })
