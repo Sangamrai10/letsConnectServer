@@ -10,7 +10,7 @@ const server = http.createServer(app)
 
 const io= new Server(server,{
   cors:{
-    origin: "https://letsconnect0.netlify.app/3",
+    origin: "https://letsconnect0.netlify.app",
     methods:["GET", "POST"]
   }
 });
