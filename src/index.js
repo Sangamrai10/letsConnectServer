@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://letsconnect0.netlify.app", "http://localhost:5173"],
+    origin: "https://letsconnect0.netlify.app",
     methods: ["GET", "POST"],
   },
 });
@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
     // Broadcast to all sockets in the same room except sender
     socket.to(data.room).emit("receive_message", data);
   });
-  
+
   socket.on("simulate_bot", ({ room, botUser, text }) => {
     const botMessage = {
       id: Date.now(),
